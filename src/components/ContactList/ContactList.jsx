@@ -19,7 +19,7 @@ export const ContactList = () => {
       {filteredContacts.map(filteredContact => (
         <ContactListItem
           key={filteredContact.id}
-          filteredContact={{ filteredContact }}
+          filteredContact={filteredContact}
         />
       ))}
     </ul>
