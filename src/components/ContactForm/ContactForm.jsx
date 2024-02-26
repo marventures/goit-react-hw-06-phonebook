@@ -1,9 +1,13 @@
 import { useState } from 'react';
-import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../../redux/contactsSlice';
+// import { getContacts } from '../../redux/selectors';
 
-export const ContactForm = ({ addContact, contacts }) => {
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts);
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -16,15 +20,12 @@ export const ContactForm = ({ addContact, contacts }) => {
   };
 
   const handleSubmit = e => {
-    // prevent the form refreshing when submitting
     e.preventDefault();
 
-    // if name and number is empty, it will not submit(return)
     if (name.trim() === '' || number.trim() === '') {
       return;
     }
 
-    // if existing contact set an alert, it will not submit(return)
     const existingContact = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
@@ -34,11 +35,7 @@ export const ContactForm = ({ addContact, contacts }) => {
     }
 
     // Add Contact
-    addContact({
-      id: nanoid(),
-      name: name.trim(),
-      number: number.trim(),
-    });
+    dispatch(addContact(name, number));
 
     // Reset Form Fields upon submitting
     setName('');
@@ -79,15 +76,4 @@ export const ContactForm = ({ addContact, contacts }) => {
       </button>
     </form>
   );
-};
-
-ContactForm.propTypes = {
-  addContact: PropTypes.func.isRequired,
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
 };
