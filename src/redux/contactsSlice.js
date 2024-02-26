@@ -12,6 +12,7 @@ const initialState = {
 };
 
 const contactsSlice = createSlice({
+  // namespace
   name: 'contacts',
   // initialState: initialState,
   initialState,
