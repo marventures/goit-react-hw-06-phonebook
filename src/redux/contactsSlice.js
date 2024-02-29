@@ -5,7 +5,6 @@ import storage from 'redux-persist/lib/storage';
 const contactsSlice = createSlice({
   // namespace
   name: 'contacts',
-  // initialState: initialState,
   initialState: {
     initialContacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
