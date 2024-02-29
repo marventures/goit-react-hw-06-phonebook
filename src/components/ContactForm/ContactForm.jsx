@@ -34,7 +34,9 @@ export const ContactForm = () => {
       return;
     }
 
-    // Add Contact
+    // When addContact is called with name and number parameters, the prepare function generates an object with a payload property.
+    // This payload object includes an id generated using nanoid(), and name and number properties after trimming any whitespace
+    // We only need to pass the necessary parameters (name, number), and the action creator handles the rest.
     dispatch(addContact(name, number));
 
     // Reset Form Fields upon submitting
